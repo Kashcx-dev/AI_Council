@@ -12,7 +12,8 @@ export default function App() {
 
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:4000/api/council/deliberate', {
+      const backendHost = import.meta.env.VITE_BACKEND_HOST || 'http://localhost:4000';
+      const res = await fetch(`${backendHost}/api/council/deliberate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt }),
