@@ -20,6 +20,9 @@ app.get('/health', (req, res) => {
 });
 
 app.use('/api', apiRouter);
+app.use((req, res) => {
+  res.status(404).json({ message: 'Not Found' });
+});
 
 app.listen(PORT, () => {
   console.log(`[AI Council Server] Running on http://localhost:${PORT}`);
