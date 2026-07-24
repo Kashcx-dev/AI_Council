@@ -26,7 +26,7 @@ authRouter.post('/register', async (req: Request, res: Response) => {
     if (!username || !password) return res.status(400).json({ error: 'Email (Username) and password required' });
 
     const db = await getDb();
-    
+
     const existing = await db.get(`SELECT id FROM users WHERE username = ?`, [username]);
     if (existing) return res.status(400).json({ error: 'Username already taken' });
 
@@ -35,7 +35,7 @@ authRouter.post('/register', async (req: Request, res: Response) => {
     const code = Math.floor(100000 + Math.random() * 900000).toString();
 
     const result = await db.run(
-      `INSERT INTO users (username, password, is_verified, two_factor_code) VALUES (?, ?, 0, ?)`, 
+      `INSERT INTO users (username, password, is_verified, two_factor_code) VALUES (?, ?, 0, ?)`,
       [username, hash, code]
     );
 
@@ -63,7 +63,7 @@ authRouter.post('/verify-2fa', async (req: Request, res: Response) => {
 
     const db = await getDb();
     const user = await db.get(`SELECT * FROM users WHERE username = ?`, [username]);
-    
+
     if (!user) return res.status(404).json({ error: 'User not found' });
     if (user.two_factor_code !== code) return res.status(400).json({ error: 'Invalid verification code' });
 

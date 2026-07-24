@@ -1,1 +1,1 @@
-export { rateLimiter, RateLimitTier, TIER_CONFIGS } from './RateLimiter.js';
+export { rateLimiter, RateLimitTier, TIER_CONFIGS } from './RateLimiter';
