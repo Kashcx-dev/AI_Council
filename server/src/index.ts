@@ -1,13 +1,13 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { initTelemetry } from './telemetry/signoz.js';
+import { initTelemetry } from './telemetry/signoz';
 // Initialize OpenTelemetry before importing application modules
 initTelemetry();
 
 import express from 'express';
 import cors from 'cors';
-import { apiRouter } from './api/routes.js';
+import { apiRouter } from './api/routes';
 
 const app = express();
 const PORT = process.env.PORT || 4000;

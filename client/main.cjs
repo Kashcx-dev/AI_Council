@@ -1,5 +1,7 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
+const fs = require('fs');
+const { exec } = require('child_process');
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -27,6 +29,65 @@ function createWindow() {
 
 // Electron is ready — create the first window.
 app.whenReady().then(() => {
+  ipcMain.handle('dialog:openDirectory', async () => {
+    const { canceled, filePaths } = await dialog.showOpenDialog({
+      properties: ['openDirectory']
+    });
+    if (canceled) {
+      return null;
+    } else {
+      return filePaths[0];
+    }
+  });
+
+  ipcMain.handle('fs:listDirectory', async (_, dirPath) => {
+    try {
+      const files = fs.readdirSync(dirPath, { withFileTypes: true });
+      return files.map(file => ({
+        name: file.name,
+        isDirectory: file.isDirectory(),
+        path: path.join(dirPath, file.name)
+      })).sort((a, b) => {
+        if (a.isDirectory === b.isDirectory) return a.name.localeCompare(b.name);
+        return a.isDirectory ? -1 : 1;
+      });
+    } catch (err) {
+      console.error(err);
+      return [];
+    }
+  });
+
+  ipcMain.handle('fs:readFile', async (_, filePath) => {
+    try {
+      return fs.readFileSync(filePath, 'utf-8');
+    } catch (err) {
+      console.error(err);
+      return '';
+    }
+  });
+
+  ipcMain.handle('fs:writeFile', async (_, filePath, content) => {
+    try {
+      fs.writeFileSync(filePath, content, 'utf-8');
+      return true;
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  });
+
+  ipcMain.handle('cmd:exec', async (_, command, cwd) => {
+    return new Promise((resolve) => {
+      exec(command, { cwd }, (error, stdout, stderr) => {
+        resolve({
+          error: error ? error.message : null,
+          stdout,
+          stderr
+        });
+      });
+    });
+  });
+
   createWindow();
 
   // macOS convention: re-create a window when the dock icon is clicked
