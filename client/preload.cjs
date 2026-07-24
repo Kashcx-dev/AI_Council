@@ -1,7 +1,10 @@
-// Preload script — intentionally minimal.
-// Since nodeIntegration is enabled and contextIsolation is disabled,
-// the renderer has direct access to Node.js globals and doesn't need
-// a contextBridge. This file exists as a placeholder for future use
-// if the security model is tightened later.
+// Preload script — exposing Node/Electron APIs safely to renderer
+const { ipcRenderer } = require('electron');
+const fs = require('fs');
+const path = require('path');
 
-console.log('[AI Council] Preload script loaded.');
+window.ipcRenderer = ipcRenderer;
+window.nodeFs = fs;
+window.nodePath = path;
+
+console.log('[AI Council] Preload script loaded with Electron IPC bindings.');

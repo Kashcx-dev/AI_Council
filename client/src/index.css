@@ -1,30 +1,56 @@
 :root {
-  --bg-primary: #0a0b0e;
-  --bg-card: #12141a;
-  --bg-card-border: rgba(255, 255, 255, 0.08);
-  --accent-orange: #ff5e36;
-  --accent-green: #2be38b;
-  --accent-blue: #5fe9ff;
+  /* Warm Slate-Charcoal Base Palette (VS Code / Linear style) */
+  --bg-primary: #18191c;
+  --bg-darkest: #141517;
+  --bg-sidebar: #18191c;
+  --bg-panel: #1c1d21;
+  --bg-card: #24252a;
+  --bg-card-hover: #2c2d33;
+  --bg-header: #1c1d21;
+  --bg-editor: #1e1f23;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-focus: #e05638;
+
+  /* Signature Action Accent (Reserved strictly for Primary Actions & Active State) */
+  --accent-orange: #e05638;
+  --accent-orange-muted: rgba(224, 86, 56, 0.15);
+
+  /* Status Accents (Restrained GitHub/Linear style, no neon glow) */
+  --accent-green: #30b06e;
+  --accent-green-muted: rgba(48, 176, 110, 0.15);
+  --accent-yellow: #d97706;
+  --accent-yellow-muted: rgba(217, 119, 6, 0.15);
+  --accent-red: #dc2626;
+  --accent-red-muted: rgba(220, 38, 38, 0.15);
+
+  /* Agent Persona Identity Accents (Subtle tags & persona cards only) */
+  --accent-architect: #38bdf8;
+  --accent-auditor: #f59e0b;
+  --accent-critic: #a855f7;
+
+  /* Refined Neutral Text Hierarchy */
   --text-main: #f3f4f6;
   --text-muted: #9ca3af;
+  --text-dim: #6b7280;
+
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
 /* Sleek Webkit Scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2d3748;
-  border-radius: 4px;
+  background: var(--border-subtle);
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #4a5568;
+  background: var(--text-dim);
 }
 
 * {
@@ -34,7 +60,7 @@
 }
 
 body {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-darkest);
   color: var(--text-main);
   font-family: var(--font-sans);
   min-height: 100vh;
@@ -46,8 +72,9 @@ code, pre {
 }
 
 .glass-panel {
-  background: rgba(18, 20, 26, 0.75);
+  background: rgba(15, 17, 23, 0.85);
   backdrop-filter: blur(16px);
-  border: 1px solid var(--bg-card-border);
-  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
