@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+websockets
+cognee
+openai
+python-dotenv
+transformers
+duckduckgo-search
