@@ -80,7 +80,6 @@ sequenceDiagram
         
         alt Unanimous Approval
             Conductor->>Conductor: Consensus Reached
-            break
         else Disagreement Detected
             Conductor->>Conductor: Compile previous debate history
         end
