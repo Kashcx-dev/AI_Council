@@ -17,9 +17,17 @@ The entire deliberation loop, token cost, consensus latency, and execution spans
    ```bash
    cd server && npm run dev
    ```
-3. Start the Frontend Dashboard:
+2. Start the Frontend Dashboard (Browser):
    ```bash
    cd client && npm run dev
+   ```
+3. Start the AI Council Desktop App (Electron):
+   ```bash
+   cd client && npm run electron:dev
+   ```
+4. Start the Telemetry Dashboard (Browser):
+   ```bash
+   npm run dev:webpage
    ```
 
 ---
