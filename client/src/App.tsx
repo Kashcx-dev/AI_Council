@@ -746,7 +746,7 @@ export default function App() {
 
         {/* PANE 3: Dedicated Right Sidebar (AI Council Thread Panel) */}
         {showCouncilPanel && (
-          <aside style={{ width: `${councilWidth}px`, display: 'flex', flexDirection: 'column', background: 'var(--bg-panel)', overflow: 'hidden' }}>
+          <aside style={{ width: `${councilWidth}px`, height: '100%', maxHeight: '100%', display: 'flex', flexDirection: 'column', background: 'var(--bg-panel)', overflow: 'hidden' }}>
             
             {/* Panel Header */}
             <div style={{ padding: '0.6rem 0.8rem', background: 'var(--bg-header)', borderBottom: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', userSelect: 'none', fontFamily: 'var(--font-sans)' }}>
