@@ -3,12 +3,14 @@
   "private": true,
   "workspaces": [
     "server",
-    "client"
+    "client",
+    "app/dashboard"
   ],
   "scripts": {
     "dev:server": "npm run dev --workspace=server",
     "dev:client": "npm run dev --workspace=client",
-    "build": "npm run build --workspace=server && npm run build --workspace=client"
+    "dev:webpage": "npm run dev --workspace=app/dashboard",
+    "build": "npm run build --workspace=server && npm run build --workspace=client && npm run build --workspace=app/dashboard"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.1",

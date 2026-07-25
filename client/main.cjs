@@ -57,6 +57,10 @@ app.whenReady().then(() => {
     }
   });
 
+  ipcMain.handle('fs:resolvePath', async (_, currentCwd, target) => {
+    return path.resolve(currentCwd, target);
+  });
+
   ipcMain.handle('fs:readFile', async (_, filePath) => {
     try {
       return fs.readFileSync(filePath, 'utf-8');

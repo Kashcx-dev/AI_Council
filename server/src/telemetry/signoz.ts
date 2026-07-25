@@ -65,3 +65,16 @@ export const tokenCounter = meter.createCounter('ai_council_tokens_total', {
 export const consensusGauge = meter.createHistogram('ai_council_confidence_score', {
   description: 'Confidence score percentage of Council decisions',
 });
+
+export const iterationCounter = meter.createCounter('ai_council_iterations_total', {
+  description: 'Total debate rounds across all deliberations',
+});
+
+export const agentLatency = meter.createHistogram('ai_council_agent_latency', {
+  description: 'Per-model response latency in milliseconds',
+  unit: 'ms',
+});
+
+export const agentTokenCounter = meter.createCounter('ai_council_agent_tokens', {
+  description: 'Per-model token usage with agent label',
+});

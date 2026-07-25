@@ -354,7 +354,11 @@ export default function App() {
       const res = await fetch(`${backendHost}/api/council/deliberate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-        body: JSON.stringify({ prompt: userPrompt, cwd }),
+        body: JSON.stringify({ 
+          prompt: userPrompt, 
+          cwd, 
+          activeFile: activeFile ? { name: activeFile.name, content: fileContent } : undefined 
+        }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -742,7 +746,7 @@ export default function App() {
 
         {/* PANE 3: Dedicated Right Sidebar (AI Council Thread Panel) */}
         {showCouncilPanel && (
-          <aside style={{ width: `${councilWidth}px`, display: 'flex', flexDirection: 'column', background: 'var(--bg-panel)' }}>
+          <aside style={{ width: `${councilWidth}px`, display: 'flex', flexDirection: 'column', background: 'var(--bg-panel)', overflow: 'hidden' }}>
             
             {/* Panel Header */}
             <div style={{ padding: '0.6rem 0.8rem', background: 'var(--bg-header)', borderBottom: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', userSelect: 'none', fontFamily: 'var(--font-sans)' }}>
@@ -756,7 +760,7 @@ export default function App() {
             </div>
 
             {/* Scrollable Conversation Thread Area */}
-            <div style={{ flex: 1, overflowY: 'auto', padding: '0.8rem', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+            <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '0.8rem', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
               
               {councilTurns.length === 0 ? (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--text-dim)', textAlign: 'center', gap: '0.6rem', padding: '2rem 1rem', fontFamily: 'var(--font-sans)' }}>
@@ -866,7 +870,7 @@ export default function App() {
                                 <p style={{ color: 'var(--text-muted)', fontSize: '0.73rem', margin: 0, lineHeight: 1.4, fontFamily: 'var(--font-sans)' }}>{agent.opinion.slice(0, 85)}...</p>
                                 {agent.command && (
                                   <div style={{ background: 'var(--bg-darkest)', padding: '0.35rem 0.5rem', borderRadius: '3px', marginTop: '0.3rem', border: '1px solid var(--border-subtle)', fontSize: '0.68rem', color: 'var(--accent-architect)', fontFamily: 'var(--font-mono)' }}>
-                                    ⚡ {agent.command}
+                                    {agent.command}
                                   </div>
                                 )}
                               </div>
@@ -993,7 +997,7 @@ export default function App() {
                 <div style={{ marginTop: '1rem', background: 'var(--bg-darkest)', padding: '1rem', borderRadius: '6px', border: '1px solid var(--border-focus)', boxShadow: '0 0 15px rgba(59, 130, 246, 0.15)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
                     <span style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--accent-yellow)', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                      ⚡ PROPOSED EXECUTION ARTIFACT
+                      PROPOSED EXECUTION ARTIFACT
                     </span>
                     <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>Shell Execution</span>
                   </div>
